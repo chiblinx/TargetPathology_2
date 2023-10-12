@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="TargetPathology.UI.SerialPortConfigControl"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:ui="clr-namespace:TargetPathology.UI"
+			 xmlns:core="clr-namespace:TargetPathology.Core.Communications"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="125" d:DesignWidth="300">
+
+	<UserControl.Resources>
+		<ui:ParityStringConverter x:Key="ParityStringConverter"/>
+		<ui:StopBitsStringConverter x:Key="StopBitsStringConverter"/>
+	</UserControl.Resources>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+
+		<!-- Add Grid.RowDefinitions -->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!-- Baud Rate -->
+		<TextBlock Text="Baud Rate:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+		<TextBox Name="BaudRateTextBox" Grid.Row="0" Grid.Column="1" Margin="5" 
+		         Text="{Binding Path=SerialPort.BaudRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+		<!-- Data Bits -->
+		<TextBlock Text="Data Bits:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+		<TextBox Name="DataBitsTextBox" Grid.Row="1" Grid.Column="1" Margin="5" 
+		         Text="{Binding Path=SerialPort.DataBits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+		<!-- Parity -->
+		<TextBlock Text="Parity:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+		<ComboBox Name="ParityCombo" Grid.Row="2" Grid.Column="1" Margin="5" 
+		          ItemsSource="{Binding Parities}" 
+		          SelectedValue="{Binding Path=SerialPort.Parity, Mode=TwoWay, Converter={StaticResource ParityStringConverter}}"/>
+
+		<!-- Stop Bits -->
+		<TextBlock Text="Stop Bits:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+		<ComboBox Name="StopBitsCombo" Grid.Row="3" Grid.Column="1" Margin="5" 
+		          ItemsSource="{Binding StopBitsOptions}" 
+		          SelectedValue="{Binding Path=SerialPort.StopBits, Mode=TwoWay, Converter={StaticResource StopBitsStringConverter}}"/>
+	</Grid>
+</UserControl>

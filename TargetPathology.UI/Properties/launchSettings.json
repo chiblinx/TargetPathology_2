@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TargetPathology.UI": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
